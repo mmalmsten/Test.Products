@@ -1,0 +1,21 @@
+﻿@model Test.Products.Database.Models.Product
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Do you really want to delete this product?</h2>
+@if (!String.IsNullOrEmpty(ViewBag.Message))
+{
+    <span>@ViewBag.Message</span>
+}
+
+@if (HttpContext.Current.Request.HttpMethod != "POST")
+{
+    <div class="col-sm-6 row margin-auto">
+        @using (Html.BeginForm("Delete", "Product", FormMethod.Post))
+        {
+            @Html.HiddenFor(x => x.ID);
+            <button type="submit" class="btn btn-danger col-xs-12">Delete product</button>
+        }
+    </div>
+}

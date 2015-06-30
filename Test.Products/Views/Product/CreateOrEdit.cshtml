@@ -1,0 +1,36 @@
+﻿@model Test.Products.Database.Models.Product
+@{
+    ViewBag.Title = "Create";
+    var edit = ViewBag.Edit ?? false;
+}
+
+<h2>@(edit ? "Edit" : "Create new") product</h2>
+@if (!String.IsNullOrEmpty(ViewBag.Message))
+{
+    <span>@ViewBag.Message</span>
+}
+
+@if (HttpContext.Current.Request.HttpMethod != "POST")
+{
+
+    <div class="col-sm-6 row margin-auto">
+        @using (Html.BeginForm(@edit ? "Edit" : "Create", "Product", FormMethod.Post, new { enctype = "multipart/form-data" }))
+        {
+            @Html.HiddenFor(x => x.ID) ;
+
+            @Html.LabelFor(x => x.Title)
+            @Html.TextBoxFor(x => x.Title, new { @class = "form-control" })
+
+            @Html.LabelFor(x => x.About)
+            @Html.TextBoxFor(x => x.About, new { @class = "form-control" })
+
+                                   //@Html.LabelFor(x => x.Image)
+                                   //@Html.TextBoxFor(x => x.Image, new { @class = "form-control" })
+                                <label for="file">Upload Image:</label>
+                                <input type="file" name="file" id="file" class="col-xs-12" />
+
+                                <button type="submit" class="btn btn-default">@(edit ? "Update" : "Create") product</button>
+        }
+    </div>
+
+}

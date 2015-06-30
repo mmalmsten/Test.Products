@@ -1,0 +1,45 @@
+﻿@model List<Test.Products.Database.Models.Product>
+@{
+    ViewBag.Title = "Products Page";
+}
+@if (!String.IsNullOrEmpty(ViewBag.Message))
+{
+    <span>@ViewBag.Message</span>
+}
+
+<div class="row">
+
+    @foreach (var product in Model)
+    {
+
+        <div class="col-sm-6 col-md-4">
+            <div class="thumbnail">
+                <div class="img" style="background-image: url(Content/Pictures/@product.Image);"></div>
+                <!--<img src="~/Content/Pictures/@product.Image" alt="@product.Title">-->
+                <div class="caption">
+                    <h3>@Html.ActionLink(product.Title, "Details/" + product.ID, "Product") <small>@product.Price SEK</small></h3>
+                    <p>@product.About</p>
+                    @if (Request.IsAuthenticated)
+                {
+                        <div class="row">
+                            @Html.ActionLink("Edit", "Edit/" + product.ID, "Product", new { @class = "btn btn-default col-sm-4 col-sm-offset-1" })
+                            @Html.ActionLink("Delete", "Delete/" + product.ID, "Product", new { @class = "btn btn-danger col-sm-4 col-sm-offset-2" })
+                        </div>
+                }
+                </div>
+            </div>
+        </div>
+    }
+</div>
+
+<script>
+	$(document).ready(function(){
+	    var highestBox = 0;
+	        $('.img').each(function(){
+	                if($(this).width() > highestBox){
+	                highestBox = $(this).width();
+	        }
+	    });
+	    $('.img').height(highestBox);
+	});
+</script>
