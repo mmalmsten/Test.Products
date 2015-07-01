@@ -15,6 +15,7 @@ namespace Test.Products.Controllers
     {
         private readonly ProductsDBContext _dbContext = new ProductsDBContext();
 
+        /* Shows list of products */
         public ActionResult Index()
         {
 
@@ -23,6 +24,7 @@ namespace Test.Products.Controllers
             return View(products);
         }
 
+        /* Shows an individual page for each product */
         public ActionResult Details(int? id)
         {
             if (id == null)
@@ -36,19 +38,22 @@ namespace Test.Products.Controllers
             return View(products);
         }
 
+        /* Form to create new product */
         [Authorize]
         public ActionResult Create()
         {
             return View("CreateOrEdit");
         }
 
+        /* Create new product */
         [HttpPost]
         [Authorize]
         public ActionResult Create(Product model, HttpPostedFileBase file)
         {
+            /* Upload image */
             if (file != null && file.ContentLength > 0)
             {
-                var fileName = DateTime.Now.ToString("yyyyMMddHHmmssfff") + Path.GetExtension(file.FileName);
+                var fileName = DateTime.Now.ToString("yyyyMMddHHmmssfff") + Path.GetExtension(file.FileName); //Image is saved as current timestamp
 
                 var dir = Server.MapPath("~/Content/Pictures/");
                 var directory = new DirectoryInfo(dir);
@@ -65,6 +70,8 @@ namespace Test.Products.Controllers
 
             }
 
+            model.Slug = model.Title.ToLower().Replace(" ", "-"); // Creates a slug
+
             _dbContext.Products.Add(model);
             _dbContext.SaveChanges();
 
@@ -73,6 +80,7 @@ namespace Test.Products.Controllers
             return View("CreateOrEdit");
         }
 
+        /* Form to edit product */
         [Authorize]
         public ActionResult Edit(int? id)
         {
@@ -87,6 +95,7 @@ namespace Test.Products.Controllers
             return View("CreateOrEdit", product);
         }
 
+        /* Update product with the new values */
         [HttpPost]
         [Authorize]
         public ActionResult Edit(Product model, HttpPostedFileBase file)
@@ -101,7 +110,9 @@ namespace Test.Products.Controllers
 
             Product f = _dbContext.Products.FirstOrDefault(x => x.ID == model.ID);
             f.Title = model.Title;
+            f.Price = model.Price;
             f.About = model.About;
+            f.Slug = model.Title.ToLower().Replace(" ", "-");
 
             if (file != null && file.ContentLength > 0)
             {
