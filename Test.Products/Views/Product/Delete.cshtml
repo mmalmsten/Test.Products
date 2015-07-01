@@ -11,11 +11,12 @@
 
 @if (HttpContext.Current.Request.HttpMethod != "POST")
 {
-    <div class="col-sm-6 row margin-auto">
+    <div class="col-sm-8 col-sm-offset-2 row deletebuttons">
         @using (Html.BeginForm("Delete", "Product", FormMethod.Post))
         {
             @Html.HiddenFor(x => x.ID);
-            <button type="submit" class="btn btn-danger col-xs-12">Delete product</button>
+            <button type="submit" class="btn btn-lg btn-danger col-xs-12 col-sm-5">Yes, delete product</button>
         }
-    </div>
+        <a href="javascript: history.go(-1)" class="btn btn-lg btn-default col-xs-12 col-sm-5 col-sm-offset-2">Cancel</a>
+</div>
 }

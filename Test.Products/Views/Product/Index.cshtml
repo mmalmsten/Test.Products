@@ -18,8 +18,8 @@
                     @if (Request.IsAuthenticated)
                     {
                         <div class="row buttons">
-                            @Html.ActionLink("Edit", "Edit/" + product.ID, "Product", new { @class = "btn btn-default col-sm-5" })
-                            @Html.ActionLink("Delete", "Delete/" + product.ID, "Product", new { @class = "btn btn-danger col-sm-5 col-sm-offset-2" })
+                            @Html.ActionLink("Edit", "Edit/" + product.ID, "Product", new { @class = "btn btn-default" })
+                            @Html.ActionLink("Delete", "Delete/" + product.ID, "Product", new { @class = "btn btn-danger" })
                         </div>
                     }
                 </div>

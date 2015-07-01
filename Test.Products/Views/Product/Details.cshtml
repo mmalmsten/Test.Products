@@ -1,25 +1,25 @@
 ﻿@model Test.Products.Database.Models.Product
 @{
-    ViewBag.Title = "Details";
+    ViewBag.Title = Model.Title;
 }
 
 <h2>
     @Model.Title
 </h2>
 
+<div class="row">
+    <img src="~/Content/Pictures/@Model.Image" alt="@Model.Title" class="col-sm-6">
+    <div class="col-sm-6">
+        <p>Price: @Model.Price SEK</p>
+        <p>@Model.About</p>
+    </div>
+</div>
+
 @if (Request.IsAuthenticated)
 {
+    <hr />
     <div class="row">
         @Html.ActionLink("Edit", "Edit/" + Model.ID, "Product", new { @class = "btn btn-default col-sm-2 col-sm-offset-3" })
         @Html.ActionLink("Delete", "Delete/" + Model.ID, "Product", new { @class = "btn btn-danger col-sm-2 col-sm-offset-2" })
     </div>
 }
-
-<hr />
-
-<div class="row">
-    <img src="~/Content/Pictures/@Model.Image" alt="@Model.Title" class="col-sm-6">
-    <div class="col-sm-6">
-        <span>@Model.About</span>
-    </div>
-</div>

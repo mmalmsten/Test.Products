@@ -52,6 +52,13 @@ a:hover{
     width: 100vw;
     max-width: 980px;
     margin: 0 auto;
+    padding: 10px;
+}
+
+@media (max-width: 767px) {
+    .row{
+        margin: 0;
+    }
 }
 
 /* Thumbnails */
@@ -71,10 +78,23 @@ a:hover{
     margin: 0;
 }
 .thumbnail h3 small{
-
+    font-size: 0.7em;
 }
-/* Navbar */
 
+/* CreateOrEdit */
+.form-group{
+    margin-bottom: 30px;
+}
+.form-group {
+}
+
+/* Delete page*/
+.deletebuttons{
+    margin-top: 60px;
+}
+
+
+/* Navbar */
 .navbar-default {
   background-color: #ffffff;
   border: 0;

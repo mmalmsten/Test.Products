@@ -8,6 +8,3 @@ c:\users\x\documents\visual studio 2013\Projects\Test.Products\Test.Products.Dat
 c:\users\x\documents\visual studio 2013\Projects\Test.Products\Test.Products.Database\obj\Debug\Test.Products.Database.csprojResolveAssemblyReference.cache
 c:\users\x\documents\visual studio 2013\Projects\Test.Products\Test.Products.Database\obj\Debug\Test.Products.Database.dll
 c:\users\x\documents\visual studio 2013\Projects\Test.Products\Test.Products.Database\obj\Debug\Test.Products.Database.pdb
-c:\users\x\documents\visual studio 2013\Projects\Test.Products\Test.Products.Database\obj\Debug\Test.Products.Database.Migrations.InitialCreate.resources
-c:\users\x\documents\visual studio 2013\Projects\Test.Products\Test.Products.Database\obj\Debug\Test.Products.Database.csproj.GenerateResource.Cache
-c:\users\x\documents\visual studio 2013\Projects\Test.Products\Test.Products.Database\obj\Debug\Test.Products.Database.Migrations.AddPrice.resources

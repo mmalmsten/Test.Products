@@ -47,15 +47,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Class1.cs" />
-    <Compile Include="Migrations\201506301814014_InitialCreate.cs" />
-    <Compile Include="Migrations\201506301814014_InitialCreate.Designer.cs">
-      <DependentUpon>201506301814014_InitialCreate.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201506301849394_AddPrice.cs" />
-    <Compile Include="Migrations\201506301849394_AddPrice.Designer.cs">
-      <DependentUpon>201506301849394_AddPrice.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Product.cs" />
     <Compile Include="ProductsDBContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -63,14 +54,6 @@
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Migrations\201506301814014_InitialCreate.resx">
-      <DependentUpon>201506301814014_InitialCreate.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201506301849394_AddPrice.resx">
-      <DependentUpon>201506301849394_AddPrice.cs</DependentUpon>
-    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
