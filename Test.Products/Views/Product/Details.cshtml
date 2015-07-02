@@ -5,21 +5,22 @@
 
 <h2>
     @Model.Title
+    @if (Request.IsAuthenticated)
+    {
+        @Html.ActionLink("Edit", "Edit/" + Model.ID, "Product", new { @class = "btn btn-sm btn-default" })
+        @Html.ActionLink("Delete", "Delete/" + Model.ID, "Product", new { @class = "btn btn-sm btn-danger" })
+    }
 </h2>
 
 <div class="row">
-    <img src="~/Content/Pictures/@Model.Image" alt="@Model.Title" class="col-sm-6">
+    <div class="col-sm-6 details">
+        <p class="text-center">@Model.About</p>
+        <hr />
+        <p class="text-right">Price: @Model.Price SEK</p>
+    </div>
     <div class="col-sm-6">
-        <p>Price: @Model.Price SEK</p>
-        <p>@Model.About</p>
+        <img src="~/Content/Pictures/@Model.Image" alt="@Model.Title">
     </div>
 </div>
 
-@if (Request.IsAuthenticated)
-{
-    <hr />
-    <div class="row">
-        @Html.ActionLink("Edit", "Edit/" + Model.ID, "Product", new { @class = "btn btn-default col-sm-2 col-sm-offset-3" })
-        @Html.ActionLink("Delete", "Delete/" + Model.ID, "Product", new { @class = "btn btn-danger col-sm-2 col-sm-offset-2" })
-    </div>
-}
+<hr />

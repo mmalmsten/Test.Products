@@ -3,10 +3,9 @@
     ViewBag.Title = "Delete";
 }
 
-<h2>Do you really want to delete this product?</h2>
 @if (!String.IsNullOrEmpty(ViewBag.Message))
 {
-    <span>@ViewBag.Message</span>
+    <h2>@ViewBag.Message</h2>
 }
 
 @if (HttpContext.Current.Request.HttpMethod != "POST")

@@ -4,10 +4,10 @@
     var edit = ViewBag.Edit ?? false;
 }
 
-<h2>@(edit ? "Edit" : "Create new") product</h2>
+<!--<h2>@(edit ? "Edit" : "Create new") product</h2>-->
 @if (!String.IsNullOrEmpty(ViewBag.Message))
 {
-    <span>@ViewBag.Message</span>
+    <h1>@ViewBag.Message</h1>
 }
 
 @if (HttpContext.Current.Request.HttpMethod != "POST")
@@ -16,8 +16,8 @@
     <div class="col-sm-8 col-sm-offset-2 row">
         @using (Html.BeginForm(@edit ? "Edit" : "Create", "Product", FormMethod.Post, new { enctype = "multipart/form-data" }))
         {
-            @Html.HiddenFor(x => x.ID) ;
-
+            @Html.HiddenFor(x => x.ID)
+            
             <div class="form-group">
                 @Html.LabelFor(x => x.Title)
                 @Html.TextBoxFor(x => x.Title, new { @class = "form-control" })
@@ -32,7 +32,7 @@
                 @Html.LabelFor(x => x.About)
                 @Html.TextAreaFor(x => x.About, new { rows = 10, columns = 40, @class = "form-control" })
             </div>
-            
+
             <div class="form-group">
                 <label for="file">Upload Image:</label>
                 <input type="file" name="file" id="file" class="col-xs-12" />
@@ -42,4 +42,21 @@
         }
     </div>
 
+}
+
+@section Scripts {
+    <script>
+        var x = document.getElementById("GPS");
+        function getLocation() {
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(showPosition);
+            } else {
+                x.value = "Geolocation is not supported by this browser.";
+            }
+        }
+        function showPosition(position) {
+            x.value = position.coords.latitude + ", " + position.coords.longitude;
+        }
+        getLocation();
+    </script>
 }

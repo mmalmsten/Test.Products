@@ -42,6 +42,7 @@ namespace Test.Products.Controllers
         [Authorize]
         public ActionResult Create()
         {
+            ViewBag.Message = "Create product";
             return View("CreateOrEdit");
         }
 
@@ -50,6 +51,7 @@ namespace Test.Products.Controllers
         [Authorize]
         public ActionResult Create(Product model, HttpPostedFileBase file)
         {
+
             /* Upload image */
             if (file != null && file.ContentLength > 0)
             {
@@ -70,9 +72,11 @@ namespace Test.Products.Controllers
 
             }
 
-            model.Slug = model.Title.ToLower().Replace(" ", "-"); // Creates a slug
+            Product f = _dbContext.Products.Add(model);
+            f.Title = model.Title;
+            f.Price = model.Price;
+            f.About = model.About;
 
-            _dbContext.Products.Add(model);
             _dbContext.SaveChanges();
 
             ViewBag.Message = "Product created";
@@ -91,6 +95,7 @@ namespace Test.Products.Controllers
             product = product ?? new Product();
 
             ViewBag.Edit = true;
+            ViewBag.Message = "Edit product";
 
             return View("CreateOrEdit", product);
         }
@@ -101,6 +106,7 @@ namespace Test.Products.Controllers
         public ActionResult Edit(Product model, HttpPostedFileBase file)
         {
             ViewBag.Edit = true;
+            ViewBag.Message = "Edit product";
 
             if (model.ID == 0)
             {
@@ -112,10 +118,14 @@ namespace Test.Products.Controllers
             f.Title = model.Title;
             f.Price = model.Price;
             f.About = model.About;
-            f.Slug = model.Title.ToLower().Replace(" ", "-");
 
+            /* If a new image is added, delete existing image and add the new one*/
             if (file != null && file.ContentLength > 0)
             {
+                var product = _dbContext.Products.Find(model.ID);
+                String oldPath = Server.MapPath("~/Content/Pictures/" + product.Image);
+                if (System.IO.File.Exists(oldPath)) { System.IO.File.Delete(oldPath); }
+
                 var fileName = DateTime.Now.ToString("yyyyMMddHHmmssfff") + Path.GetExtension(file.FileName);
 
                 var dir = Server.MapPath("~/Content/Pictures/");
@@ -143,6 +153,8 @@ namespace Test.Products.Controllers
         [Authorize]
         public ActionResult Delete(int? id)
         {
+            ViewBag.Message = "Do you really want to delete this product?";
+
             if (id == null)
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
 
@@ -167,6 +179,10 @@ namespace Test.Products.Controllers
             }
 
             var product = _dbContext.Products.Find(model.ID);
+
+            String oldPath = Server.MapPath("~/Content/Pictures/" + product.Image);
+            if (System.IO.File.Exists(oldPath)) { System.IO.File.Delete(oldPath); }
+
             _dbContext.Products.Remove(product);
             _dbContext.SaveChanges();
 

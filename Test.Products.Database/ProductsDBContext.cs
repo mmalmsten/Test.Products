@@ -10,11 +10,9 @@ namespace Test.Products.Database
 {
     public class ProductsDBContext : DbContext
     {
-
         public ProductsDBContext()
             : base("DefaultConnection")
         {
-
         }
         public DbSet<Product> Products { get; set; }
     }

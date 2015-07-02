@@ -9,39 +9,39 @@
 
 <div class="row">
 
-    @foreach (var product in Model)
-    {
-
-        <div class="col-sm-4 col-md-3">
-            <div class="thumbnail">
-                <div class="img" style="background-image: url(../Content/Pictures/@product.Image);">
-                    @if (Request.IsAuthenticated)
-                    {
-                        <div class="row buttons">
-                            @Html.ActionLink("Edit", "Edit/" + product.ID, "Product", new { @class = "btn btn-default" })
-                            @Html.ActionLink("Delete", "Delete/" + product.ID, "Product", new { @class = "btn btn-danger" })
-                        </div>
-                    }
-                </div>
-                <div class="caption">
-                    <h3>
-                        @Html.ActionLink(product.Title, "Details/" + product.ID, "Product")<br />
-                        <small>@product.Price SEK</small>
-                    </h3>
-                </div>
+        @foreach (var product in Model)
+        {
+            <div class="col-sm-4 col-md-3 thumbnail">
+                @if (Request.IsAuthenticated)
+                {
+                    <div class="buttons">
+                        @Html.ActionLink("Edit", "Edit/" + product.ID, "Product", new { @class = "btn btn-default" })
+                        @Html.ActionLink("Delete", "Delete/" + product.ID, "Product", new { @class = "btn btn-danger" })
+                    </div>
+                }
+                <a href="@Url.Action("Details/" + product.ID)">
+                    <div class="img" style="background-image: url(../Content/Pictures/@product.Image);"></div>
+                    <div class="caption">
+                        <h3>
+                            @product.Title<br />
+                            <small>@product.Price SEK</small>
+                        </h3>
+                    </div>
+                </a>
             </div>
-        </div>
-    }
+        }
 </div>
 
-<script>
-	$(document).ready(function(){
-	    var highestBox = 0;
-	        $('.img').each(function(){
-	                if($(this).width() > highestBox){
-	                highestBox = $(this).width();
-	        }
-	    });
-	    $('.img').height(highestBox);
-	});
-</script>
+@section Scripts {
+    <script>
+        $(document).ready(function () {
+            var highestBox = 0;
+            $('.img').each(function () {
+                if ($(this).width() > highestBox) {
+                    highestBox = $(this).width();
+                }
+            });
+            $('.img').height(highestBox);
+        });
+    </script>
+}
