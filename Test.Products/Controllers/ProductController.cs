@@ -76,6 +76,7 @@ namespace Test.Products.Controllers
             f.Title = model.Title;
             f.Price = model.Price;
             f.About = model.About;
+            f.User = System.Web.HttpContext.Current.User.Identity.Name;
 
             _dbContext.SaveChanges();
 
@@ -92,6 +93,11 @@ namespace Test.Products.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
 
             var product = _dbContext.Products.SingleOrDefault(x => x.ID == id);
+            
+            /* If product isn't owned by current user, redirect to Products page */
+            if (product.User != System.Web.HttpContext.Current.User.Identity.Name)
+                return RedirectToAction("../Product");
+
             product = product ?? new Product();
 
             ViewBag.Edit = true;
@@ -115,6 +121,11 @@ namespace Test.Products.Controllers
             }
 
             Product f = _dbContext.Products.FirstOrDefault(x => x.ID == model.ID);
+
+            /* If product isn't owned by current user, redirect to Products page */
+            if (f.User != System.Web.HttpContext.Current.User.Identity.Name)
+                return RedirectToAction("../Product");
+
             f.Title = model.Title;
             f.Price = model.Price;
             f.About = model.About;
@@ -159,6 +170,11 @@ namespace Test.Products.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
 
             var product = _dbContext.Products.SingleOrDefault(x => x.ID == id);
+
+            /* If product isn't owned by current user, redirect to Products page */
+            if (product.User != System.Web.HttpContext.Current.User.Identity.Name)
+                return RedirectToAction("../Product");
+
             product = product ?? new Product();
 
             return View("Delete", product);
@@ -168,7 +184,6 @@ namespace Test.Products.Controllers
         [Authorize]
         public ActionResult Delete(Product model)
         {
-
             if (!ModelState.IsValid)
                 return View("Delete");
 
@@ -179,6 +194,11 @@ namespace Test.Products.Controllers
             }
 
             var product = _dbContext.Products.Find(model.ID);
+
+            /* If product isn't owned by current user, redirect to Products page */
+            if (product.User != System.Web.HttpContext.Current.User.Identity.Name)
+                return RedirectToAction("../Product");
+
 
             String oldPath = Server.MapPath("~/Content/Pictures/" + product.Image);
             if (System.IO.File.Exists(oldPath)) { System.IO.File.Delete(oldPath); }

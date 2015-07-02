@@ -7,17 +7,24 @@
     <span>@ViewBag.Message</span>
 }
 
+<p class="lead text-center">Register a user to be able to add products.</p>
+
 <div class="row">
 
         @foreach (var product in Model)
         {
             <div class="col-sm-4 col-md-3 thumbnail">
-                @if (Request.IsAuthenticated)
+                @if (Request.IsAuthenticated && product.User == System.Web.HttpContext.Current.User.Identity.Name)
                 {
                     <div class="buttons">
-                        @Html.ActionLink(" ", "Details/" + product.ID, "Product", new { @class = "btn btn-default glyphicon glyphicon-fullscreen" })
                         @Html.ActionLink(" ", "Edit/" + product.ID, "Product", new { @class = "btn btn-default glyphicon glyphicon-edit" })
                         @Html.ActionLink(" ", "Delete/" + product.ID, "Product", new { @class = "btn btn-danger glyphicon glyphicon-trash" })
+                    </div>
+                }
+                else if (Request.IsAuthenticated)
+                {
+                    <div class="buttons">
+                        <p>You can only edit and/ or delete your own products</p>
                     </div>
                 }
                 <a href="@Url.Action("Details/" + product.ID)">

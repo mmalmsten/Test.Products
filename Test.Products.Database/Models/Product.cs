@@ -22,5 +22,7 @@ namespace Test.Products.Database.Models
 
         public string Image { get; set; }
 
+        public string User { get; set; }
+
     }
 }
