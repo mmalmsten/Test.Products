@@ -31,6 +31,10 @@ img{
     font-size: 1.3em;
 }
 
+.btn{
+    border-radius: 0;
+}
+
 btn-sm{
     float: none !important;
     margin-left: 10px;
@@ -41,7 +45,7 @@ btn-sm{
     background: #efdada;
     border-color: #cfbaba;
 }
-.btn-default:hover{
+.btn-default:hover, .btn-default:active{
     color: #7c4f4f;
     background: #cfbaba;
     border-color: #af9a9a;
@@ -51,20 +55,21 @@ btn-sm{
     background: #bc8f8f;
     border-color: #9c6f6f;
 }
-.btn-danger:hover{
+.btn-danger:hover, .btn-danger:active{
     background: #9c6f6f;
     border-color: #7c4f4f;
 }
 
 .img{
-    background-size: cover;
+    background-size: 150%;
     background-position: center;
     -webkit-transition: all 1s;
     -moz-transition: all 1s;
     transition: all 1s;
 }
-.img:hover{
+.thumbnail:hover .img{
     opacity: 0.5;
+    background-size: 200%;
 }
 
 .content{

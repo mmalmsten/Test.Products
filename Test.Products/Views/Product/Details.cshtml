@@ -7,8 +7,10 @@
     @Model.Title
     @if (Request.IsAuthenticated)
     {
-        @Html.ActionLink("Edit", "Edit/" + Model.ID, "Product", new { @class = "btn btn-sm btn-default" })
-        @Html.ActionLink("Delete", "Delete/" + Model.ID, "Product", new { @class = "btn btn-sm btn-danger" })
+        <div class="btn-group" role="group">
+            @Html.ActionLink(" ", "Edit/" + Model.ID, "Product", new { @class = "btn btn-sm btn-default glyphicon glyphicon-edit" })
+            @Html.ActionLink(" ", "Delete/" + Model.ID, "Product", new { @class = "btn btn-sm btn-danger glyphicon glyphicon-trash" })
+        </div>
     }
 </h2>
 
@@ -22,5 +24,3 @@
         <img src="~/Content/Pictures/@Model.Image" alt="@Model.Title">
     </div>
 </div>
-
-<hr />

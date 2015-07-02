@@ -15,8 +15,9 @@
                 @if (Request.IsAuthenticated)
                 {
                     <div class="buttons">
-                        @Html.ActionLink("Edit", "Edit/" + product.ID, "Product", new { @class = "btn btn-default" })
-                        @Html.ActionLink("Delete", "Delete/" + product.ID, "Product", new { @class = "btn btn-danger" })
+                        @Html.ActionLink(" ", "Details/" + product.ID, "Product", new { @class = "btn btn-default glyphicon glyphicon-fullscreen" })
+                        @Html.ActionLink(" ", "Edit/" + product.ID, "Product", new { @class = "btn btn-default glyphicon glyphicon-edit" })
+                        @Html.ActionLink(" ", "Delete/" + product.ID, "Product", new { @class = "btn btn-danger glyphicon glyphicon-trash" })
                     </div>
                 }
                 <a href="@Url.Action("Details/" + product.ID)">
